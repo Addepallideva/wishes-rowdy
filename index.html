@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dumbo to Rowdy</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: url('background.jpg') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Segoe UI', sans-serif;
+      color: #333;
+      overflow: hidden;
+ background-size: contain;
+            height: 80vh;
+            display: flex;
+    }
+    .container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      padding: 30px;
+      background-color: rgba(255, 255, 255, 0.6);
+      box-sizing: border-box;
+      overflow-y: auto;
+    }
+    .letter {
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 18px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+    .photo {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.5);
+      opacity: 0;
+      transition: opacity 1s ease, transform 1s ease;
+      z-index: 10;
+      pointer-events: none;
+    }
+    .photo.show {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    .photo img {
+      max-width: 250px;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+      animation: rotateZoom 4s ease-in-out;
+    }
+
+    @keyframes rotateZoom {
+      0% { transform: scale(0.8) rotate(-5deg); }
+      50% { transform: scale(1.05) rotate(5deg); }
+      100% { transform: scale(1) rotate(0); }
+    }
+  </style>
+</head>
+<body>
+  <audio id="bgmusic" autoplay loop>
+    <source src="piano.mp3" type="audio/mpeg" />
+    Your browser does not support the audio element.
+  </audio>
+
+  <div class="container">
+    <div class="letter" id="letter"></div>
+    <div class="photo" id="photo1"><img src="photo1.jpg" alt="Photo 1"/></div>
+    <div class="photo" id="photo2"><img src="photo2.jpg" alt="Photo 2"/></div>
+  </div>
+
+  <script>
+    // Lower the piano music volume
+    const music = document.getElementById("bgmusic");
+    music.volume = 0.15; // Adjust as needed
+
+    const text = `💌 Dumbo to Rowdy\n
+Na life lo first time Rowdy ni chusina moment... freshers day lo, stage meedha funny songs ki dance chesthunav 😄. Apudu nenu heartfully navvanu 😂. Aa navvu inka gurtuntadi. 
+
+Konni rojulu tarvata, insta request ochindhi 📲. Accept chesa... kani rumors tho, manam face-to-face matladadam avoid chesam 😶. Nenu open person ayina kuda, neetho directly matladaleka unanu...maybe rumors tho uncomfortable ayyamu. But, first move nenu chesa 🙋‍♀️. Konni situations lo matladam start chesam. Appude friendship ki oka small spark vachindhi ✨.\n
+
+🎉 Turning point - Vijayawada trip! 🚌 Appudu naku first time feel ayyindi... neetho unte I’m safe. You made me feel strong, secure, and happy 😌. Brothers and classmates andariki paina, neevu maathram special ga feel ayyav 🩵.\n
+
+Dec 31 nenu fix chesanu — neevu naa best friend ani 💯. Apatinunchi manam full friendship lo enter ayyamu 😂 — roasting, teasing, sharing pains and laughs... 💥\n
+
+Naa house lo kalisi chesina scenes, gifts ichukunna moments 🎁, sad situations ni support chesina memories... anni memory lane lo untayi 📸.\n
+
+Even ammamma adugutundi 😂 — “Rowdy ela unnadu?” ani.\n
+
+Evaru em cheppina, nuvu naa side lo undevadu. Na kosam try chesthav. Ninnu hurt chesina moments unte... I’m really sorry 😢.\n
+
+But one thing cheppali... *Nee friendship, naa life lo best blessing* 💙.\n
+
+Na marriage, nee marriage ayyina tarvata kuda — manam ilaage undali. Mana sneham sky ki reach aipotundi ☁️🌈.\n
+
+Love you ra Rowdy... always 💌.`;
+
+    const letterDiv = document.getElementById("letter");
+    let i = 0;
+
+    function typeLetter() {
+      if (i < text.length) {
+        letterDiv.textContent += text.charAt(i);
+
+        // Show photo1 around "Vijayawada trip"
+        if (i === text.indexOf("Vijayawada trip")) {
+          showPhoto("photo1");
+        }
+
+        // Show photo2 around "ammamma"
+        if (i === text.indexOf("ammamma")) {
+          showPhoto("photo2");
+        }
+
+        i++;
+        setTimeout(typeLetter, 40); // Letter speed
+      }
+    }
+
+    function showPhoto(id) {
+      const el = document.getElementById(id);
+      el.classList.add("show");
+      setTimeout(() => {
+        el.classList.remove("show");
+      }, 4000); // 4 sec show time
+    }
+
+    window.onload = typeLetter;
+  </script>
+</body>
+</html>
